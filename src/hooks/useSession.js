@@ -10,14 +10,6 @@ export const login = async (email, password) => {
     return response;
 }
 
-export const session = async () => {
-    const response = await fetchData(
-        `${API_URL}/session`,
-        'GET'
-    );
-    return response;
-}
-
 export const logout = async () => {
     const response = await fetchData(
         `${API_URL}/logout`,

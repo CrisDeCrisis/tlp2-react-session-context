@@ -1,8 +1,12 @@
-import React from 'react'
+import { useAuth } from './contexts/authProvider';
+import { Home } from './components/home';
+import { Login } from './components/login';
 
 function App() {
+  const { state } = useAuth();
+
   return (
-    <div>App</div>
+    state.isAuth ? <Home /> : <Login />
   )
 }
 

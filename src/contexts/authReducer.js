@@ -1,4 +1,4 @@
-import { authTypes } from './profileTypes.js';
+import { authTypes } from './authTypes.js';
 
 export const profileReducer = (state, action) => {
     switch (action.type) {
@@ -7,19 +7,12 @@ export const profileReducer = (state, action) => {
                 ...state,
                 user: action.payload,
                 isAuth: true,
-                isLoading: false,
             };
         case authTypes.LOGOUT:
             return {
                 ...state,
                 user: null,
                 isAuth: false,
-                isLoading: false,
-            };
-        case authTypes.SET_LOADING:
-            return {
-                ...state,
-                isLoading: true,
             };
         default:
             return state;

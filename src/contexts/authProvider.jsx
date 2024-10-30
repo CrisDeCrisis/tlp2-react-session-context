@@ -1,18 +1,16 @@
 import { createContext, useContext, useReducer } from "react";
-import { login, session, logout } from '../hooks/useSession.js';
-import { profileReducer } from "./profileReducer";
-import { authTypes } from "./profileTypes";
+import { login, logout } from '../hooks/useSession.js';
+import { profileReducer } from "./authReducer.js";
+import { authTypes } from "./authTypes.js";
 
 
 const authContext = createContext();
 
-export const SessionProvider = () => {
-
+export const SessionProvider = ({ children }) => {
     const initialState = {
         user: null,
-        token: null,
+        isAuth: null,
         error: null,
-        loading: false
     }
 
     const [state, dispatch] = useReducer(profileReducer, initialState);
@@ -30,26 +28,6 @@ export const SessionProvider = () => {
         } catch (error) {
             dispatch({
                 type: authTypes.LOGIN,
-                payload: error
-            });
-            return error;
-        }
-    }
-
-
-    const userSession = async () => {
-        try {
-            const response = await session();
-            if (response.ok) {
-                dispatch({
-                    type: authTypes.SET_LOADING,
-                    payload: response.data
-                });
-            }
-            return response;
-        } catch (error) {
-            dispatch({
-                type: authTypes.SET_LOADING,
                 payload: error
             });
             return error;
@@ -75,7 +53,7 @@ export const SessionProvider = () => {
     }
 
     return (
-        <authContext.Provider value={{ state, userLogin, userSession, userLogout }}>
+        <authContext.Provider value={{ state, userLogin, userLogout }}>
             {children}
         </authContext.Provider>
     )
