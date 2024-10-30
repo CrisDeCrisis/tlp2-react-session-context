@@ -1,7 +1,20 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
+import { Loading } from './Loading.jsx'
 
 export const Home = () => {
+    const [isLoading, setIsLoading] = useState(true);
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (isLoading) {
+        return <Loading />;
+    }
 
     return (
         <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">

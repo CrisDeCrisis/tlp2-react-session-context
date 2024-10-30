@@ -1,12 +1,20 @@
-import { useAuth } from './contexts/authProvider';
-import { Home } from './components/home';
-import { Login } from './components/login';
+import React from 'react'
+import { SessionProvider } from './contexts/authProvider.jsx'
+import { Toaster } from 'react-hot-toast'
+import AppView from './views/AppView'
 
-function App() {
-  const { state } = useAuth();
-
+const App = () => {
   return (
-    state.isAuth ? <Home /> : <Login />
+    <>
+      <Toaster
+        position="bottom-left"
+        reverseOrder={false}
+        toastOptions={{ duration: 3000 }}
+      />
+      <SessionProvider>
+        <AppView />
+      </SessionProvider>
+    </>
   )
 }
 

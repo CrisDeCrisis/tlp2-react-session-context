@@ -1,7 +1,10 @@
 import React from 'react';
+import { useAuth } from '../contexts/authProvider';
 import { useForm } from 'react-hook-form';
 
 export const Login = () => {
+    const { userLogin } = useAuth();
+
     const {
         register,
         handleSubmit,
@@ -10,6 +13,7 @@ export const Login = () => {
 
     const onSubmit = data => {
         console.log(data);
+        userLogin(data.email, data.password);
     };
 
     return (
