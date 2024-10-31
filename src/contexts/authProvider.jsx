@@ -2,6 +2,7 @@ import { createContext, useContext, useReducer } from "react";
 import { login, logout } from '../hooks/useSession.js';
 import { profileReducer } from "./authReducer.js";
 import { authTypes } from "./authTypes.js";
+import Cookies from 'js-cookie';
 import toast from "react-hot-toast";
 
 const authContext = createContext();
@@ -13,6 +14,13 @@ export const SessionProvider = ({ children }) => {
         error: null,
         isLoading: false
     };
+
+    const cookieState = Cookies.get('token');
+    if (cookieState) {
+        const parsedState = JSON.parse(cookieState);
+        initialState.user = parsedState.user;
+        initialState.isAuth = parsedState.isAuth;
+    }
 
     const [state, dispatch] = useReducer(profileReducer, initialState);
 
