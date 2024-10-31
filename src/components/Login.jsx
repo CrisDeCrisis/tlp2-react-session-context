@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 
 export const Login = () => {
     const { userLogin } = useAuth();
-
     const {
         register,
         handleSubmit,
@@ -12,7 +11,6 @@ export const Login = () => {
     } = useForm();
 
     const onSubmit = data => {
-        console.log(data);
         userLogin(data.email, data.password);
     };
 

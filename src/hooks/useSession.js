@@ -7,8 +7,15 @@ export const login = async (email, password) => {
         'POST',
         { email, password }
     );
-    return response;
+    return await response.json();
 }
+
+// export const session = async () => {
+//     const response = await fetchData(
+//         `${API_URL}/session`
+//     );
+//     return response;
+// }
 
 export const logout = async () => {
     const response = await fetchData(
